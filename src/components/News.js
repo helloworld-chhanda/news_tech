@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './News.css';
 import React,{  useEffect, useState } from 'react';
 import axios from 'axios';

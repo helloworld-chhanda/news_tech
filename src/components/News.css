@@ -42,7 +42,7 @@
 }
 .search {
   position: absolute;
-  left: 92%;
+  left: 93.5%;
   right: 0%;
   height: 100%;
   width: 100px;
@@ -79,7 +79,7 @@
   position: absolute;
   width: 60%;
   height: 40px;
-  right: 0%;
+  right: 4%;
   bottom: 7%;
   color: white;
   background: #1B72E8;
