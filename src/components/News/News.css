@@ -46,7 +46,7 @@
   width: 50px;
   top: 38px;
   /* background: rgba(0, 0, 0, 0.6); */
-  background: url('../images/search/Vector.png') no-repeat;
+  background: url('../../images/search/Vector.png') no-repeat;
   z-index: 4;
 
 }

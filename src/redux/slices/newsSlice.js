@@ -17,8 +17,11 @@ const newsSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(fetchNews.fulfilled, (state, action) => {
-                console.log('payload',action.payload)
+                //console.log('payload',action.payload)
                 state.allNews = action.payload.articles
+                state.isLoading = false
+            })
+            .addCase(fetchNews.rejected,(state, action) => {
                 state.isLoading = false
             })
     }

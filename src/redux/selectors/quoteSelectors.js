@@ -1,0 +1,1 @@
+export const _quote = state => state.quote.quote
