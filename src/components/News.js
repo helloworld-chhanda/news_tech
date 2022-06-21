@@ -2,22 +2,15 @@ import './News.css';
 import React,{  useEffect, useState } from 'react';
 import axios from 'axios';
 import logo from '../images/logo.png';
+import {useDispatch,useSelector} from 'react-redux'
+import { _allNews, _isLoading } from '../redux/selectors/newsSelectors';
+import { fetchNews } from '../redux/thunks/newsThunk';
 
 function News() {
-  const [isLoading,setIsLoading] = useState(true);
-  const [allNews,setAllNews] = useState([]);
-  const getNews = async (search='apple') =>{
-    setIsLoading(true);
-    if(!search) {
-      setIsLoading(false);
-      return;
-    }
-    const response = await axios.get(`https://newsapi.org/v2/everything?q=${search}&from=2022-06-16&to=2022-06-16&sortBy=popularity&apiKey=67a73fe9e2034c589ed00342ef80e50d`)
-    const articles = response.data.articles;
-    setAllNews(articles);
-    setIsLoading(false);
-    console.log(articles);
-  }
+  const dispatch = useDispatch();
+  const isLoading = useSelector(_isLoading)
+  const allNews = useSelector(_allNews)
+  
   const [quote,setQuote] = useState('');
   const getQuote = async () =>{
     let response = await axios.get(`https://api.quotable.io/random`);
@@ -29,10 +22,10 @@ function News() {
   const handleOnKeyUp = (e) =>{
     const value = e.target.value;
     console.log(value);
-    getNews(value);
+    dispatch(fetchNews())
   }
   useEffect(()=>{
-    getNews();
+    dispatch(fetchNews())
     getQuote();
   },[])
   return (
