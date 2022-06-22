@@ -18,7 +18,12 @@ const newsSlice = createSlice({
             })
             .addCase(fetchNews.fulfilled, (state, action) => {
                 //console.log('payload',action.payload)
-                state.allNews = action.payload.articles
+                state.allNews = action.payload.articles.map((news,index) => {
+                    return {
+                        ...news,
+                        id: index+1
+                    }
+                })
                 state.isLoading = false
             })
             .addCase(fetchNews.rejected,(state, action) => {

@@ -1,8 +1,20 @@
 import News from "./components/News/News";
-
-function App(){
+import NewsDetails from "./components/NewsDetails/NewsDetails";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+  } from "react-router-dom";
+export default function App() {
     return (
-        <News />
-    )
+      <Router>
+          <Routes>
+            <Route path="/news-details/:newsId" element={<NewsDetails />}>
+            </Route>
+            <Route path="/" element={<News/>}>
+            </Route>
+          </Routes>
+      </Router>
+    );
 }
-export default App;
