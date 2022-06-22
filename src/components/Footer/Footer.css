@@ -1,0 +1,20 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    background: #FBFCFD;
+    border-top: 2px solid #E5E5E5;
+    padding: 30px;
+}
+.footer-item {
+    
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 31px;
+text-align: center;
+margin-top: 10px;
+color: #000000;
+
+}

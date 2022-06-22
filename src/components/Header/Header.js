@@ -6,7 +6,7 @@ import { fetchNews } from '../../redux/thunks/newsThunk';
 import { fetchQuote } from '../../redux/thunks/quoteThunk';
 import { _quote } from '../../redux/selectors/quoteSelectors';
 
-function Header() {
+function Header(props) {
   const dispatch = useDispatch();
   const quote = useSelector(_quote)
   
