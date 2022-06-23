@@ -16,7 +16,7 @@ const quoteSlice = createSlice({
                 
             })
             .addCase(fetchQuote.fulfilled, (state, action) => {
-                state.quote = action.payload.content
+                state.quote = action.payload.description
                 
             })
     }

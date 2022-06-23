@@ -21,7 +21,7 @@ const newsSlice = createSlice({
                 state.allNews = action.payload.articles.map((news,index) => {
                     return {
                         ...news,
-                        id: index+1
+                        id: index+'unique'
                     }
                 })
                 state.isLoading = false
