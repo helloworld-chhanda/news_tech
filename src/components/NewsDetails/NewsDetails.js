@@ -35,7 +35,7 @@ function NewsDetails() {
                 <div className='content'>
                     {showReadMore ? news?.description?.substr(0,30) : news?.description}
                     {
-                        showReadMore ? (<div className="read-more-link" onClick={()=>{setShowReadMore(!showReadMore)}}>Read More</div>)
+                        showReadMore ? (<button className="read-more-link" onClick={()=>{setShowReadMore(!showReadMore)}}>Read More</button>)
                             : null
                     }
                         
