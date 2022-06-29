@@ -3,13 +3,19 @@ import { fetchNews } from '../thunks/newsThunk'
 
 const initialState = {
     isLoading: true,
-    allNews: []
+    allNews: [],
+    page: 1,
+    limit: 9,
+    currentNews: []
 }
 const newsSlice = createSlice({
     name: 'news',
     initialState,
     reducers: {
-        
+      nextPage(state,action) {
+          state.page++
+          state.currentNews = state.allNews.slice(0,(state.limit*state.page))
+      }  
     },
     extraReducers: builder => {
         builder
@@ -18,12 +24,14 @@ const newsSlice = createSlice({
             })
             .addCase(fetchNews.fulfilled, (state, action) => {
                 //console.log('payload',action.payload)
-                state.allNews = action.payload.articles.map((news,index) => {
+                const result = action.payload.articles.map((news,index) => {
                     return {
                         ...news,
-                        id: index+'unique'
+                        id: index + 1
                     }
                 })
+                state.allNews = result
+                state.currentNews = result.slice(0,9)
                 state.isLoading = false
             })
             .addCase(fetchNews.rejected,(state, action) => {
@@ -31,6 +39,8 @@ const newsSlice = createSlice({
             })
     }
 })
+
+export const {nextPage} = newsSlice.actions 
 
 
 export default newsSlice.reducer

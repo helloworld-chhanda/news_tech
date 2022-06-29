@@ -7,31 +7,49 @@ import './NewsDetails.css'
 import {useSelector, useDispatch} from 'react-redux'
 import {useState} from 'react';
 import { fetchNews } from '../../redux/thunks/newsThunk'
+import leftArrow from '../../images/leftArrow.png';
+import rightArrow from '../../images/rightArrow.png';
+import { Link } from 'react-router-dom';
+import imageLoader from '../../images/image-loader.gif'
 
 function NewsDetails() {
     const dispatch = useDispatch();
     let { newsId } = useParams();
     const allNews = useSelector(_allNews)
-   const news = allNews.find(function (news) {
-    return  newsId == news.id 
-   })
+    useEffect(()=>{
+        console.log('hello')
+         dispatch(fetchNews())
+         if (news?.description?.length > 30) setShowReadMore(true)
+    },[dispatch])
+    
+    const news = allNews?.find(function (news) {
+        return  Number(newsId) === news.id 
+    })
    const [showReadMore,setShowReadMore]=useState(false);
-   useEffect(()=>{
-        dispatch(fetchNews())
-   },[])
-   useEffect(()=>{
-       console.log("news",news);
-       if (news?.description?.length > 30) setShowReadMore(true)
-   },[])
+   
 
     return (
         <>
             <div className='container'>
                 <Header />
-                <div className='title'>
-                    {news?.title}
+                <div className='details-image-container'>
+                    <div className='title'>
+                        {news?.title}
+                    </div>
+                    {
+                        news?.urlToImage ? (
+                            <img className='image' alt='newsImage' src={news?.urlToImage} />
+                        ) : (
+                            <img className='image' alt='newsImage' src={imageLoader} />
+                        )
+                    }
+                    
+                    {news?.author ? (
+                      <div className='details-author'>
+                        {news.author}
+                      </div>
+                    ) : null}
                 </div>
-                <img className='image' alt='newsImage' src={news?.urlToImage} />
                 <div className='content'>
                     {showReadMore ? news?.description?.substr(0,30) : news?.description}
                     {
@@ -40,6 +58,14 @@ function NewsDetails() {
                     }
                         
                 </div>
+            </div>
+            <div className='arrow-container'>
+                <Link to={'/news-details/'+news?.id <= 1 ? 1 : (news?.id-1)}>
+                    <img className='arrow' src={leftArrow} alt='vector1'/>
+                </Link>
+                <Link to={'/news-details/'+(news?.id+1)}>
+                    <img className='arrow' src={rightArrow} alt='vector2'/>
+                </Link>
             </div>
             <div>
                 <Footer />

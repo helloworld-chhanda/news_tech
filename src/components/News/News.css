@@ -108,7 +108,7 @@
 
 }
 .image-organize {
-  
+  min-height: 800px;
   display: flex;
   justify-content: space-between; 
   flex-wrap: wrap;
@@ -140,4 +140,24 @@
   100% {
     transform: rotate(360deg);
   }
+}
+.load-container {
+  display: flex;
+  justify-content: center;
+}
+.load-more {
+  width:150px;
+  height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-size: medium;
+  background-color: red;
+  color: white;
+  border-radius: 17px;
+  border-color: red;
+  cursor: pointer;
 }
