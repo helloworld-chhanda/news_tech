@@ -11,13 +11,28 @@ import leftArrow from '../../images/leftArrow.png';
 import rightArrow from '../../images/rightArrow.png';
 import { Link } from 'react-router-dom';
 import imageLoader from '../../images/image-loader.gif'
+import { getContent } from '../../common/utils'
 
 function NewsDetails() {
     const dispatch = useDispatch();
     let { newsId } = useParams();
     const allNews = useSelector(_allNews)
+    const [content,setContent] = useState("")
+
+    async function setNewsContent(){
+        if (allNews.length){
+            const latestNews = allNews?.find(function (news) {
+                return  Number(newsId) === news.id 
+           }) 
+           const result = await getContent(latestNews.url)
+           setContent(result)
+        }
+    }
     useEffect(()=>{
-        console.log('hello')
+      setNewsContent()  
+        
+    },[allNews])
+    useEffect(()=>{
          dispatch(fetchNews())
          if (news?.description?.length > 30) setShowReadMore(true)
     },[dispatch])
@@ -50,12 +65,13 @@ function NewsDetails() {
                       </div>
                     ) : null}
                 </div>
-                <div className='content'>
-                    {showReadMore ? news?.description?.substr(0,30) : news?.description}
+                <div className='content' dangerouslySetInnerHTML={{__html: content}}>
+                    {/* {showReadMore ? news?.description?.substr(0,30) : news?.description}
                     {
                         showReadMore ? (<button className="read-more-link" onClick={()=>{setShowReadMore(!showReadMore)}}>Read More</button>)
                             : null
-                    }
+                    } */}
+                    
                         
                 </div>
             </div>

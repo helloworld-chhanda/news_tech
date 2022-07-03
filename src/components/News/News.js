@@ -8,6 +8,9 @@ import Footer from '../Footer/Footer';
 import { Link } from 'react-router-dom';
 import imageLoader from '../../images/image-loader.gif'
 import { nextPage } from '../../redux/slices/newsSlice';
+
+
+
 /**
  * total results = 57
  * limit = 9
